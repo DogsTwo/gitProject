@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//    function aa(m) {
+//        var promise=new Promise((resolve,reject)=>{
+//            if(m>4){
+//                m++;
+//                resolve(m);
+//            }else{
+//                m--;
+//                reject(m);
+//            }
+//        });
+//        return promise;
+//    }
+//    aa(7).then((t)=>{
+//        console.log("ok"+t);
+//        console.log(bb);
+//    })
+//    .catch((t)=>{
+//        console.log("fail"+t);
+//    });
+//    function aa(m) {
+//        var promise=new Promise((resolve,reject)=>{
+//            setTimeout(()=>{
+//                resolve(m);
+//            },1000)
+//        });
+//        return promise;
+//    }
+//    aa("nini").then((res)=>{
+//        console.log(res);
+//        return aa(res+" is");
+//    }).then((res)=>{
+//        console.log(res);
+//        return aa(res+" lucky");
+////        return aa("你好");
+//    }).then((res)=>{
+//        console.log(res);
+//    })
+//    var p=new Promise((resolve,reject)=>{
+//        resolve();
+//    }),temp;
+//    temp=p.then(()=>{
+//
+//    });
+//    temp.then(()=>{
+//        console.log("成功")
+//    })
+//console.log(temp);
+//console.log(p);
+    //resolve状态
+//    var arr=[1,2,3];
+//    var proArr=arr.map((item)=>{
+//        var promise=new Promise((resolve,reject)=>{
+//            resolve(item*5);
+//        });
+//        return promise;
+//    });
+//    Promise.all(proArr).then((res)=>{
+//        console.log(res);
+//    });
+    //reject状态
+//    var arr=[1,2,3];
+//    var proArr=arr.map((item)=>{
+//        var promise=new Promise((resolve,reject)=>{
+//            if(item==3){
+//                reject("拒绝")
+//            }
+//            resolve(item*5);
+//        });
+//        return promise;
+//    });
+//    Promise.all(proArr).then((res)=>{
+//        console.log(res);
+//    }).catch((res)=>{
+//        console.log(res);
+//    });
+
+////请求某个图片资源
+//function requestImg(){
+//    var p = new Promise(function(resolve, reject){
+//        var img = new Image();
+//        img.onload = function(){
+//            resolve(img);
+//        };
+//        img.src = 'address1.png';
+//    });
+//    return p;
+//}
+//
+////延时函数，用于给请求计时
+//function timeout(){
+//    var p = new Promise(function(resolve, reject){
+//        setTimeout(function(){
+//            reject('图片请求超时');
+//        }, 5000);
+//    });
+//    return p;
+//}
+//Promise
+//        .race([requestImg(), timeout()])
+//        .then(function(results){
+//            console.log(results);
+//        })
+//        .catch(function(reason){
+//            console.log(reason);
+//        });
+//var p1 = new Promise(function(resolve, reject) {
+//    setTimeout(resolve, 300, 'p1完成');
+//});
+//var p2 = new Promise(function(resolve, reject) {
+//    setTimeout(resolve, 50, 'p2完成');
+//});
+//var p3 = new Promise(function(resolve, reject) {
+//    setTimeout(reject, 100, 'p3拒绝');
+//});
+//Promise.race([p1, p2, p3]).then(function(data) {
+//    // 显然p2更快，所以状态变成了fulfilled
+//    // 如果p3更快，那么状态就会变成rejected
+//    console.log(data); // p2完成
+//}).catch(function(err) {
+//    console.log(err); // 不执行
+//});
+    var reqPic=new Promise((resolve,reject)=>{
+        var img=new Image();
+        img.src="aaa.png";
+        img.onload=()=>{
+            resolve(img);
+        }
+    });
+    var picTimeOut=new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            reject("图片请求超时")
+        },5000)
+    });
+    Promise.race([reqPic,picTimeOut]).then((res)=>{
+        console.log(res);
+    }).catch((res)=>{
+        console.log(res);
+    })
+</script>
+</body>
+</html>
